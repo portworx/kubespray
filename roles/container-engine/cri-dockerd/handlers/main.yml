@@ -17,8 +17,10 @@
   service:
     name: cri-dockerd.socket
     state: restarted
+    enabled: yes
 
 - name: cri-dockerd | reload cri-dockerd.service
   service:
     name: cri-dockerd.service
     state: restarted
+    enabled: yes
