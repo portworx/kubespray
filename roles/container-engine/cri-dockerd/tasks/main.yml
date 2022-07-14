@@ -24,7 +24,7 @@
   notify:
     - restart cri-dockerd
 
-- name: cri-dockerd | Ensure cri-dockerd is started and enabled
+- name: Ensure cri-dockerd is started and enabled
   systemd:
     name: cri-dockerd
     daemon_reload: yes
