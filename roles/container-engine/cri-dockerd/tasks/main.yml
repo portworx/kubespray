@@ -23,3 +23,10 @@
     - cri-dockerd.socket
   notify:
     - restart cri-dockerd
+
+- name: cri-dockerd | Ensure cri-dockerd is started and enabled
+  systemd:
+    name: cri-dockerd
+    daemon_reload: yes
+    enabled: yes
+    state: started
