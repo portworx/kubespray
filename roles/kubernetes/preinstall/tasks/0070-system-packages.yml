@@ -1,4 +1,17 @@
 ---
+- name: Ensure SSH connectivity
+  wait_for:
+    host: "{{ inventory_hostname }}"
+    port: 22
+    delay: 3
+    timeout: 30
+    state: started
+  register: ssh_connectivity
+  retries: 5
+  delay: "{{ retry_stagger | random + 4 }}"
+  until: ssh_connectivity is succeeded
+  tags: bootstrap-os
+
 - name: Update package management cache (zypper) - SUSE
   command: zypper -n --gpg-auto-import-keys ref
   register: make_cache_output
@@ -37,8 +50,7 @@
     update_cache: yes
     cache_valid_time: 3600
   when: ansible_os_family == "Debian"
-  tags:
-    - bootstrap-os
+  tags: bootstrap-os
 
 - name: Remove legacy docker repo file
   file:
@@ -56,19 +68,25 @@
     - ansible_os_family == "RedHat"
     - not is_fedora_coreos
     - epel_enabled | bool
+  tags: bootstrap-os
+
+- name: Install packages requirements (Flatcar)
+  raw: |
+    # Add your custom package installation commands here
+    echo "No package manager available on Flatcar. Ensure required packages are pre-installed."
+  when: ansible_os_family == "Flatcar"
+  register: pkgs_task_result
+  retries: "{{ pkg_install_retries }}"
+  delay: "{{ retry_stagger | random + 3 }}"
   tags:
     - bootstrap-os
 
 - name: Install packages requirements
   vars:
-    # The json_query for selecting packages name is split for readability
-    # see files/pkgs-schema.json for the structure of `pkgs`
-    # and the matching semantics
     full_query: "[? value | (enabled == null || enabled) && ( {{ filters_os }} ) && ( {{ filters_groups }} ) ].key"
     filters_groups: "groups | @ == null || [? contains(`{{ group_names }}`, @)]"
     filters_os: "os == null || (os | ( {{ filters_family }} ) || ( {{ filters_distro }} ))"
     dquote: !unsafe '"'
-    # necessary to workaround Ansible escaping
     filters_distro: "distributions.{{ dquote }}{{ ansible_distribution  }}{{ dquote }} |
                           @ == `{}` ||
                           contains(not_null(major_versions, `[]`), '{{ ansible_distribution_major_version }}') ||
@@ -82,5 +100,7 @@
   until: pkgs_task_result is succeeded
   retries: "{{ pkg_install_retries }}"
   delay: "{{ retry_stagger | random + 3 }}"
+  when: ansible_os_family != "Flatcar"
   tags:
     - bootstrap-os
+
