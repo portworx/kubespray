@@ -127,6 +127,7 @@ supported_os_distributions:
   - 'UnionTech'
   - 'UniontechOS'
   - 'openEuler'
+  - 'Photon'
 
 # Extending some distributions into the redhat os family
 redhat_os_family_extensions:
@@ -142,3 +143,5 @@ disable_fapolicyd: true
 
 # Enable 0120-growpart-azure-centos-7 tasks
 growpart_azure_enabled: true
+
+dhclienthookfile: /etc/dhcp/dhclient.conf

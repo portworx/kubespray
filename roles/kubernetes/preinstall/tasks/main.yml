@@ -147,3 +147,24 @@
   when:
     - kube_network_plugin == 'calico'
     - not ignore_assert_errors
+- name: Docker | Get package facts
+  setup:
+  when: ansible_pkg_mgr in ['apt', 'dnf', 'yum', 'zypper', 'pacman', 'apk', 'portage']
+
+- name: Docker | Ensure Python rpm library is installed on Photon OS
+  dnf:
+    name: python3-rpm
+    state: present
+  when: ansible_distribution == 'Photon'
+  tags:
+    - container-engine
+
+- name: Docker | Install Docker packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ docker_packages }}"
+  when: ansible_distribution == 'Photon'
+  tags:
+    - container-engine
