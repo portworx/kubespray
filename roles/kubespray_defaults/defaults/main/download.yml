@@ -82,7 +82,7 @@ containerd_version: "{{ (containerd_archive_checksums['amd64'] | dict2items)[0].
 cri_dockerd_version: "{{ (cri_dockerd_archive_checksums['amd64'] | dict2items)[0].key }}"
 
 # this is relevant when container_manager == 'docker'
-docker_containerd_version: 1.6.32
+docker_containerd_version: 1.7.27
 
 # gcr and kubernetes image repo define
 gcr_image_repo: "gcr.io"
