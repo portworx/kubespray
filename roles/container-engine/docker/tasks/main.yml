@@ -47,16 +47,13 @@
   import_tasks: pre-upgrade.yml
 
 - name: Ensure docker-ce repository public key is installed
-  apt_key:
-    id: "{{ item }}"
-    url: "{{ docker_repo_key_info.url }}"
-    keyring: "{{ docker_repo_key_keyring | default(omit) }}"
-    state: present
-  register: keyserver_task_result
-  until: keyserver_task_result is succeeded
-  retries: 4
-  delay: "{{ retry_stagger | d(3) }}"
-  with_items: "{{ docker_repo_key_info.repo_keys }}"
+  shell: |
+    curl -fsSL https://example.com/key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/example-archive-keyring.gpg
+    echo "deb [signed-by=/usr/share/keyrings/example-archive-keyring.gpg] https://example.com/apt stable main" \
+      | sudo tee /etc/apt/sources.list.d/example.list
+    sudo apt-get update
+  args:
+    executable: /bin/bash
   environment: "{{ proxy_env }}"
   when: ansible_pkg_mgr == 'apt'
 
