@@ -56,8 +56,16 @@ docker_versioned_pkg:
   '27.4': docker-ce=5:27.4.1-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
   '27.5': docker-ce=5:27.5.4-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
   '28.0': docker-ce=5:28.0.2-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
-  'stable': docker-ce=5:28.0.2-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
-  'edge': docker-ce=5:28.0.2-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '28.1': docker-ce=5:28.1.1-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '28.2': docker-ce=5:28.2.2-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '28.3': docker-ce=5:28.3.3-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '28.4': docker-ce=5:28.4.0-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '28.5': docker-ce=5:28.5.2-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '29.0': docker-ce=5:29.0.4-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '29.1': docker-ce=5:29.1.5-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '29.2': docker-ce=5:29.2.1-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  'stable': docker-ce=5:29.2.1-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  'edge': docker-ce=5:29.2.1-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
 
 docker_cli_versioned_pkg:
   'latest': docker-ce-cli
@@ -76,8 +84,16 @@ docker_cli_versioned_pkg:
   '27.4': docker-ce-cli=5:27.4.1-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
   '27.5': docker-ce-cli=5:27.5.4-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
   '28.0': docker-ce-cli=5:28.0.2-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
-  'stable': docker-ce-cli=5:28.0.2-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
-  'edge': docker-ce-cli=5:28.0.2-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '28.1': docker-ce-cli=5:28.1.1-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '28.2': docker-ce-cli=5:28.2.2-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '28.3': docker-ce-cli=5:28.3.3-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '28.4': docker-ce-cli=5:28.4.0-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '28.5': docker-ce-cli=5:28.5.2-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '29.0': docker-ce-cli=5:29.0.4-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '29.1': docker-ce-cli=5:29.1.5-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  '29.2': docker-ce-cli=5:29.2.1-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  'stable': docker-ce-cli=5:29.2.1-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
+  'edge': docker-ce-cli=5:29.2.1-1~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release | lower }}
 
 docker_package_info:
   pkgs:
