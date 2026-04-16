@@ -91,6 +91,24 @@
 #     - ansible_distribution != "Fedora"
 #     - not is_ostree
 
+- name: Add Docker GPG key (Debian/Ubuntu)
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Add Docker repository (Debian/Ubuntu)
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+    filename: docker
+  when: ansible_os_family == 'Debian'
+
+- name: Update apt cache after adding Docker repository
+  apt:
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+
 - name: Remove dpkg hold
   dpkg_selections:
     name: "{{ item }}"
