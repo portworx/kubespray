@@ -1,0 +1,4 @@
+---
+docker_version: "24.0"
+docker_cli_version: "24.0"
+docker_containerd_version: "1.7.13"

@@ -76,7 +76,9 @@ gvisor_version: 20210921
 containerd_version: 1.5.9
 
 # this is relevant when container_manager == 'docker'
-docker_containerd_version: 1.4.12
+docker_version: "24.0"
+docker_cli_version: "24.0"
+docker_containerd_version: "1.6.28"
 
 # gcr and kubernetes image repo define
 gcr_image_repo: "gcr.io"
