@@ -90,8 +90,9 @@ docker_repo_key_info:
     - '{{ docker_debian_repo_repokey }}'
 
 docker_repo_info:
+  pkg_repo: apt_repository
   repos:
     - >
-      deb {{ docker_debian_repo_base_url }}
-      {{ ansible_distribution_release | lower }}
-      stable
+       deb {% if ansible_distribution_major_version | int >= 13 %}[signed-by=/etc/apt/keyrings/docker.asc] {% endif %}{{ docker_debian_repo_base_url }}
+       {{ ansible_distribution_release|lower }}
+       stable
