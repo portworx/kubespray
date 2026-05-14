@@ -96,5 +96,5 @@ docker_repo_info:
   repos:
     - >
        deb {% if ansible_distribution_major_version | int >= 13 %}[signed-by=/etc/apt/keyrings/docker.asc] {% endif %}{{ docker_debian_repo_base_url }}
-       {{ ansible_distribution_release|lower }}
+       {% if ansible_distribution_major_version | int >= 13 %}bookworm{% else %}{{ ansible_distribution_release|lower }}{% endif %}
        stable
