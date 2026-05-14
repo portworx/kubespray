@@ -80,9 +80,11 @@ docker_cli_versioned_pkg:
 
 docker_package_info:
   pkgs:
-    - "{{ containerd_versioned_pkg[docker_containerd_version | string] }}"
-    - "{{ docker_cli_versioned_pkg[docker_cli_version | string] }}"
-    - "{{ docker_versioned_pkg[docker_version | string] }}"
+    - name: "containerd.io"
+    - name: "docker-ce={{ docker_cli_version }}*"
+    - name: "docker-ce-cli={{ docker_cli_version }}*"
+    - name: "docker-buildx-plugin"
+    - name: "docker-compose-plugin"
 
 docker_repo_key_info:
   url: '{{ docker_debian_repo_gpgkey }}'
