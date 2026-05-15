@@ -69,7 +69,8 @@
   environment: "{{ proxy_env }}"
   when:
     - ansible_pkg_mgr == 'apt'
-    - ansible_distribution_major_version | int < 13 or ansible_distribution != 'Debian'
+    - ansible_distribution == 'Debian'
+    - ansible_distribution_major_version | int >= 13
 
 - name: Ensure /etc/apt/keyrings directory exists
   file:
