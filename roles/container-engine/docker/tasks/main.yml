@@ -47,30 +47,17 @@
   import_tasks: pre-upgrade.yml
 
 - name: Ensure docker-ce repository public key is installed
-  shell: |
-    sudo apt-get update
-    sudo apt-get install -y ca-certificates curl gnupg
-
-    sudo mkdir -p /etc/apt/keyrings
-    curl -fsSL https://download.docker.com/linux/debian/gpg \
-      | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    sudo chmod a+r /etc/apt/keyrings/docker.gpg
-
-    echo \
-      "deb [arch=$(dpkg --print-architecture) \
-    signed-by=/etc/apt/keyrings/docker.gpg] \
-    https://download.docker.com/linux/debian \
-    bookworm stable" \
-      | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-    sudo apt-get update
-  args:
-    executable: /bin/bash
+  apt_key:
+    url: "{{ docker_repo_key_info.url }}"
+    state: present
+  register: keyserver_task_result
+  until: keyserver_task_result is succeeded
+  retries: 4
+  delay: "{{ retry_stagger | d(3) }}"
   environment: "{{ proxy_env }}"
   when:
     - ansible_pkg_mgr == 'apt'
-    - ansible_distribution == 'Debian'
-    - ansible_distribution_major_version | int >= 13
+    - not (ansible_distribution == 'Debian' and ansible_distribution_major_version | int >= 13)
 
 - name: Ensure /etc/apt/keyrings directory exists
   file:
