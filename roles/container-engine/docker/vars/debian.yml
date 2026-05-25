@@ -70,13 +70,7 @@ docker_repo_info:
   pkg_repo: apt_repository
   repos:
     - >
-<<<<<<< Updated upstream
-       deb {% if ansible_distribution_major_version | int >= 13 %}[signed-by=/etc/apt/keyrings/docker.asc] {% endif %}{{ docker_debian_repo_base_url }}
-       {% if ansible_distribution_major_version | int >= 13 %}bookworm{% else %}{{ ansible_distribution_release|lower }}{% endif %}
-       stable
-=======
       deb
       {% if ansible_distribution == 'Debian' and ansible_distribution_major_version | int >= 13 %}[signed-by=/etc/apt/keyrings/docker.asc] {% endif %}{{ docker_debian_repo_base_url }}
-      {{ ansible_distribution_release | lower }}
+      {% if ansible_distribution == 'Debian' and ansible_distribution_major_version | int >= 13 %}bookworm{% else %}{{ ansible_distribution_release | lower }}{% endif %}
       stable
->>>>>>> Stashed changes
