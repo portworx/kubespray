@@ -55,11 +55,11 @@ docker_cli_versioned_pkg:
 
 docker_package_info:
   pkgs:
-    - name: "containerd.io"
-    - name: "docker-ce={{ docker_cli_version }}*"
-    - name: "docker-ce-cli={{ docker_cli_version }}*"
-    - name: "docker-buildx-plugin"
-    - name: "docker-compose-plugin"
+    - "containerd.io"
+    - "docker-ce={{ docker_cli_version }}*"
+    - "docker-ce-cli={{ docker_cli_version }}*"
+    - "docker-buildx-plugin"
+    - "docker-compose-plugin"
 
 docker_repo_key_info:
   url: '{{ docker_debian_repo_gpgkey }}'
