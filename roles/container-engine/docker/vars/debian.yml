@@ -56,8 +56,8 @@ docker_cli_versioned_pkg:
 docker_package_info:
   pkgs:
     - "containerd.io"
-    - "docker-ce={{ docker_cli_version }}*"
-    - "docker-ce-cli={{ docker_cli_version }}*"
+    - "{{ docker_versioned_pkg[docker_version | string] }}"
+    - "{{ docker_cli_versioned_pkg[docker_cli_version | string] }}"
     - "docker-buildx-plugin"
     - "docker-compose-plugin"
 
